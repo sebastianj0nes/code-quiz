@@ -101,13 +101,19 @@ var loadChoices = function (){
 
 
     for (var i = 0; i < 4; i++){
+        // Locator for total amount of indexes
         var j = 0;
+        // Button element
         var option = document.createElement("button");
+        // Adjust text content of option variable (button)
         option.textContent = answers[j][i];
+        // Set each element with a unique class identifier
+        option.setAttribute("class",[i]);
+        // Append 
         document.querySelector("#choices").appendChild(option);
     }
 
-       
+    choices.addEventListener("click",console)
     
     
     // function (event){

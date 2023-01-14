@@ -63,10 +63,18 @@ var loadQuestion = function (){
     "What method is used to obtain an id/class from HTML to be used in javascript?"
     ]
 
+    var iterator = 0;
     // Call for loop to iterate through questions array
-    for (var i = 0; i < questions.length; i++){
-        qTitle.textContent = questions[i];
-    }    
+    var nextQuestion = function (){ 
+        if (iterator === 0){
+            qTitle.textContent = questions[iterator]
+        } else{ 
+            qTitle.textContent = questions[iterator++];
+        }
+    }
+    
+   nextQuestion();
+
     var quesDiv = document.querySelector("#questions");
     quesDiv.setAttribute("class", "show");
 
@@ -74,6 +82,12 @@ var loadQuestion = function (){
 
 // Given a question - load the appropriate answer responses
     // Using choices div 
+        // With 4 button options one has to be the right option
+        // If user chooses the right option - answer = correct 
+            // Else remove time
+
+        // How will you take input to check if the answer is right?
+            // Add event listener to 
 
 var loadChoices = function (){
 
@@ -92,13 +106,22 @@ var loadChoices = function (){
         option.textContent = answers[j][i];
         document.querySelector("#choices").appendChild(option);
     }
+
        
     
-    choices.addEventListener("click", function (event){
+    
+    // function (event){
 
+    //     nextQuestion();
+    //     var element = event.target;
         
+    // if (element.textContent === "<h1>"){
+    //     timeRemaining - 20;
+    // }
 
-    })
+    // })
     
 
 }   
+
+

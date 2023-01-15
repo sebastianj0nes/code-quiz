@@ -4,8 +4,11 @@
 var questionsWithAnswers = [
     // Question 1
     {
+        // Question 
         question: "What is the tag for the element which will produce the largest header?",
-        answer: "<h6>",
+        // Answer
+        answer: "<h1>",
+        // Array of answers to choose from
         potentialAnswers: ["<h6>","<h3>","<h1>","<h42>"]
     },
     // Question 2

@@ -6,6 +6,9 @@ var startScreen = document.querySelector("questions");
 var qTitle = document.querySelector("#question-title");
 var choices = document.querySelector("#choices");
 
+// Set index to 0 (start)
+var quesIndex = 0;
+
 
 
 var startQuiz = function (){
@@ -36,6 +39,7 @@ var startQuiz = function (){
             }
         }, 1000);
         
+        // Call functions to load the questions & choices
         loadQuestion();
         loadChoices();
     });
@@ -47,9 +51,6 @@ var loadQuestion = function (){
     // Set variable for questions div
     var quesDiv = document.querySelector("#questions");
     quesDiv.setAttribute("class", "show");
-
-    // Set index to 0 (start)
-    var quesIndex = 0;
 
     // Load the question title with question from question array (found in questions.js)
     qTitle.textContent = questionsWithAnswers[quesIndex].question;
@@ -72,9 +73,34 @@ var loadChoices = function (){
         option.textContent = questionsWithAnswers[choiceIndex].potentialAnswers[i];
         // Append each button to choices id
         document.querySelector("#choices").appendChild(option);
-    }
-    // Increase choice index by 1 each time
-    choiceIndex++;
+        // Add the answer to HTML - allows logic to choose between right/wrong answer later
+        option.setAttribute("answer", questionsWithAnswers[choiceIndex].potentialAnswers[i]);
+
+        // Event listener for click on button
+        option.addEventListener("click",function (event){
+
+            // Element = clicked on element
+            var element = event.target;
+            // Get answer attribute from button
+            var chosenAnswer = element.getAttribute("answer");
+            // Declare variable for right answer
+            var rightAnswer = questionsWithAnswers[choiceIndex].answer;
+            
+            // If chosen answer is the same as 
+            if (chosenAnswer === rightAnswer){
+
+            } else {
+
+            };
+        
+            // Get answer for next question
+            choiceIndex++;
+        })
+    }   
+
 }   
 
+// Start quiz
 startQuiz();
+
+

@@ -13,6 +13,9 @@ var finalScore = document.querySelector("#final-score");
 var quesIndex = 0;
 var choiceIndex = 0;
 
+var constTimer = setInterval(start,1000);
+
+var start = function(){
 // Add event listener to pick up on button click
 startButton.addEventListener("click",function startQuiz(){
     
@@ -27,23 +30,21 @@ startButton.addEventListener("click",function startQuiz(){
     var timeInterval = setInterval(function(){
         // Each second -1 from time remaining
         timeRemaining--;
-
-        // Set timer text content to time remaining variable
-        timer.textContent = timeRemaining;
-
-        // If no time left
         if (timeRemaining <= 0){
-            clearInterval(timeInterval);
-            // End quiz function
             endQuiz();
         }
+        // Set timer text content to time remaining variable
+        timer.textContent = timeRemaining;
+        // If no time left
+      
     }, 1000);
     
     // Call functions to load the questions & choices
     loadQuestion();
     loadChoices();
 });
-
+};
+start();
 // Load question function 
 var loadQuestion = function (){
 
@@ -63,6 +64,7 @@ var loadQuestion = function (){
     if (questionTitle === "end"){
         // Call function to end quiz
         endQuiz();
+        return;
     }
 }   
 
@@ -74,13 +76,10 @@ var loadChoices = function (){
 
     // For loop to run through all choices (i = 4 as 4 answers for each question)
     for (var i = 0; i < 4; i++){
-        // Set index to 0 (start)
 
         // Create button for each choice
         var option = document.createElement("button");
-        // Set text content to each choice
-        // console.log(questionsWithAnswers[0].potentialAnswers[i]);
-        
+        // Set text content to each choice        
         option.textContent = questionsWithAnswers[choiceIndex].potentialAnswers[i];
         // Append each button to choices id
         document.querySelector("#choices").appendChild(option);
@@ -122,12 +121,11 @@ var wrongAnswer = function (){
     loadQuestion();
     loadChoices();
 
-    if (timeRemaining <= 0){
-        console.log("Game over");
-    }
+
+   
 }
 
-// Func to run if right answer
+// Func to run if right answer - similar functionality to wrongAnswer func
 var theRightAnswer = function(){
     feedback.setAttribute("class","feedback");
     feedback.textContent = "Correct!";
@@ -145,15 +143,9 @@ var endQuiz = function (){
     // Show end screen
     endScreen.setAttribute("class","show");
     // Set timer to 0 
-    timer.textContent = 0;
-
-    if (timeRemaining >= 0){
-        finalScore.textContent = timeRemaining;
-    } else {
-        finalScore.textContent = 0;
-    }
-
+    
+    finalScore.textContent = timeRemaining;
+    timer.setAttribute("class","hide");
 
 }
-
 

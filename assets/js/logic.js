@@ -12,8 +12,6 @@ var finalScore = document.querySelector("#final-score");
 // Initialise some counter variables
 var quesIndex = 0;
 var choiceIndex = 0;
-var questionsLeft = 6;
-
 
 // Add event listener to pick up on button click
 startButton.addEventListener("click",function startQuiz(){
@@ -46,7 +44,6 @@ startButton.addEventListener("click",function startQuiz(){
     loadChoices();
 });
 
-
 // Load question function 
 var loadQuestion = function (){
 
@@ -56,16 +53,17 @@ var loadQuestion = function (){
     quesDiv.setAttribute("class", "show");
 
     // Load the question title with question from question array (found in questions.js)
-    qTitle.textContent = questionsWithAnswers[quesIndex].question;
+    var questionTitle = qTitle.textContent = questionsWithAnswers[quesIndex].question;
 
     console.log(quesIndex);
     // Add to index (get next question)
     quesIndex++;
 
-    if (quesIndex+1 === 7){
+    if (questionTitle === "end"){
         endQuiz();
-    }
+        console.log(questionTitle + "! It was me brother");
 
+    }
 }   
 
 // Load choices function
@@ -110,8 +108,6 @@ var loadChoices = function (){
     }   
     // console.log(questionsLeft);
     choiceIndex = choiceIndex + 1;
-    questionsLeft--;
-    // Get next question ready
 }   
 
 // Func to run if wrong answer

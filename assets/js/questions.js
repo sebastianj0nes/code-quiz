@@ -35,5 +35,9 @@ var questionsWithAnswers = [
         answer: "document.querySelector",
         potentialAnswers: ["document.querySelector", "document.QuerySelectorAll","document.getElement","document.setAttribute"]
 
+    },
+    // End question 
+    {
+        question: "end"
     }
 ]

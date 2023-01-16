@@ -9,9 +9,10 @@ var feedback = document.querySelector("#feedback");
 var endScreen = document.querySelector("#end-screen");
 var finalScore = document.querySelector("#final-score");
 
-// Set index to 0 (start)
+// Initialise some counter variables
 var quesIndex = 0;
 var choiceIndex = 0;
+var questionsLeft = 6;
 
 
 var startQuiz = function (){
@@ -57,15 +58,21 @@ var loadQuestion = function (){
 
     // Load the question title with question from question array (found in questions.js)
     qTitle.textContent = questionsWithAnswers[quesIndex].question;
+
+    console.log(quesIndex);
     // Add to index (get next question)
     quesIndex++;
+
+    if (quesIndex+1 === 7){
+        endQuiz();
+    }
 
 }   
 
 // Load choices function
 var loadChoices = function (){
 
-    
+
     // Remove any previous elements when call function again
     choices.innerHTML = "";
 
@@ -103,13 +110,10 @@ var loadChoices = function (){
             
         })
     }   
-    // Get next question ready
+    // console.log(questionsLeft);
     choiceIndex = choiceIndex + 1;
-    console.log(choiceIndex);
-    if (choiceIndex > 6){
-        endQuiz();
-    }
- 
+    questionsLeft--;
+    // Get next question ready
 }   
 
 // Func to run if wrong answer
@@ -131,7 +135,6 @@ var wrongAnswer = function (){
 
 // Func to run if right answer
 var theRightAnswer = function(){
-
     feedback.setAttribute("class","feedback");
     feedback.textContent = "Correct!";
 
@@ -143,12 +146,16 @@ var endQuiz = function (){
     startScreen.setAttribute("class","hide");
     feedback.setAttribute("class","hide");
     endScreen.setAttribute("class","show");
+    timer.textContent = 0;
+
 
     if (timeRemaining >= 0){
         finalScore.textContent = timeRemaining;
     } else {
         finalScore.textContent = 0;
     }
+
+
 }
 
 

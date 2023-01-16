@@ -2,10 +2,12 @@
 var startButton = document.querySelector("#start");
 var timer = document.querySelector("#time");
 var timeRemaining = 75;
-var startScreen = document.querySelector("questions");
+var startScreen = document.querySelector("#questions");
 var qTitle = document.querySelector("#question-title");
 var choices = document.querySelector("#choices");
 var feedback = document.querySelector("#feedback");
+var endScreen = document.querySelector("#end-screen");
+var finalScore = document.querySelector("#final-score");
 
 // Set index to 0 (start)
 var quesIndex = 0;
@@ -31,11 +33,11 @@ var startQuiz = function (){
             // Set timer text content to time remaining variable
             timer.textContent = timeRemaining;
 
-
+            // If no time left
             if (timeRemaining <= 0){
                 clearInterval(timeInterval);
-                // Add another function to display end 
-
+                // End quiz function
+                endQuiz();
             }
         }, 1000);
         
@@ -71,7 +73,6 @@ var loadChoices = function (){
     for (var i = 0; i < 4; i++){
         // Set index to 0 (start)
 
-        console.log(choiceIndex);
         // Create button for each choice
         var option = document.createElement("button");
         // Set text content to each choice
@@ -99,13 +100,16 @@ var loadChoices = function (){
             } else {    
                 wrongAnswer();
             };
-        
-            console.log("Index now" + choiceIndex);
+            
         })
     }   
-    
+    // Get next question ready
     choiceIndex = choiceIndex + 1;
-
+    console.log(choiceIndex);
+    if (choiceIndex > 6){
+        endQuiz();
+    }
+ 
 }   
 
 // Func to run if wrong answer
@@ -134,6 +138,24 @@ var theRightAnswer = function(){
     loadQuestion();
     loadChoices();
 }
+
+var endQuiz = function (){
+    startScreen.setAttribute("class","hide");
+    feedback.setAttribute("class","hide");
+    endScreen.setAttribute("class","show");
+
+    if (timeRemaining >= 0){
+        finalScore.textContent = timeRemaining;
+    } else {
+        finalScore.textContent = 0;
+    }
+}
+
+
+
+
+
+
 
 // Start quiz
 startQuiz();

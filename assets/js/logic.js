@@ -31,7 +31,12 @@ startButton.addEventListener("click",function startQuiz(){
         // Each second -1 from time remaining
         timeRemaining--;
         if (timeRemaining <= 0){
-            endQuiz();
+            console.log("Stop");
+            clearInterval(timeInterval);
+            // If final score has no value - call end quiz 
+            if (finalScore.textContent <=0){
+                endQuiz();
+            }
         }
         // Set timer text content to time remaining variable
         timer.textContent = timeRemaining;
@@ -122,7 +127,9 @@ var wrongAnswer = function (){
     loadChoices();
 
 
-   
+    if (timeRemaining <= 0){
+        endQuiz();
+    }
 }
 
 // Func to run if right answer - similar functionality to wrongAnswer func
@@ -146,6 +153,7 @@ var endQuiz = function (){
     
     finalScore.textContent = timeRemaining;
     timer.setAttribute("class","hide");
-
+    
+    // Set local storage to score the value of user's final score
+    localStorage.setItem("lastScore",finalScore.textContent); 
 }
-

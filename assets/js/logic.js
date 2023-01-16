@@ -59,10 +59,10 @@ var loadQuestion = function (){
     // Add to index (get next question)
     quesIndex++;
 
+    // If no more questions 
     if (questionTitle === "end"){
+        // Call function to end quiz
         endQuiz();
-        console.log(questionTitle + "! It was me brother");
-
     }
 }   
 
@@ -155,14 +155,5 @@ var endQuiz = function (){
 
 
 }
-
-
-
-
-
-
-
-// Start quiz
-startQuiz();
 
 

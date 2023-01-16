@@ -15,38 +15,37 @@ var choiceIndex = 0;
 var questionsLeft = 6;
 
 
-var startQuiz = function (){
-    // Add event listener to pick up on button click
-    startButton.addEventListener("click",function startQuiz(){
-        
-        // When click on button - remove start of quiz - load questions
-        var hideStart = function(){
-            var wrapDiv = document.querySelector("#start-screen");
-            wrapDiv.setAttribute("class","hide");
+// Add event listener to pick up on button click
+startButton.addEventListener("click",function startQuiz(){
+    
+    // When click on button - remove start of quiz - load questions
+    var hideStart = function(){
+        var wrapDiv = document.querySelector("#start-screen");
+        wrapDiv.setAttribute("class","hide");
+    }
+    hideStart();
+
+    // Set timer interval
+    var timeInterval = setInterval(function(){
+        // Each second -1 from time remaining
+        timeRemaining--;
+
+        // Set timer text content to time remaining variable
+        timer.textContent = timeRemaining;
+
+        // If no time left
+        if (timeRemaining <= 0){
+            clearInterval(timeInterval);
+            // End quiz function
+            endQuiz();
         }
-        hideStart();
+    }, 1000);
+    
+    // Call functions to load the questions & choices
+    loadQuestion();
+    loadChoices();
+});
 
-        // Set timer interval
-        var timeInterval = setInterval(function(){
-            // Each second -1 from time remaining
-            timeRemaining--;
-
-            // Set timer text content to time remaining variable
-            timer.textContent = timeRemaining;
-
-            // If no time left
-            if (timeRemaining <= 0){
-                clearInterval(timeInterval);
-                // End quiz function
-                endQuiz();
-            }
-        }, 1000);
-        
-        // Call functions to load the questions & choices
-        loadQuestion();
-        loadChoices();
-    });
-};
 
 // Load question function 
 var loadQuestion = function (){
@@ -71,7 +70,6 @@ var loadQuestion = function (){
 
 // Load choices function
 var loadChoices = function (){
-
 
     // Remove any previous elements when call function again
     choices.innerHTML = "";
@@ -142,12 +140,16 @@ var theRightAnswer = function(){
     loadChoices();
 }
 
+// Func to end quiz
 var endQuiz = function (){
+    // Hide start screen
     startScreen.setAttribute("class","hide");
+    // Hide feedback
     feedback.setAttribute("class","hide");
+    // Show end screen
     endScreen.setAttribute("class","show");
+    // Set timer to 0 
     timer.textContent = 0;
-
 
     if (timeRemaining >= 0){
         finalScore.textContent = timeRemaining;

@@ -9,6 +9,7 @@ var feedback = document.querySelector("#feedback");
 var endScreen = document.querySelector("#end-screen");
 var finalScore = document.querySelector("#final-score");
 
+
 // Initialise some counter variables
 var quesIndex = 0;
 var choiceIndex = 0;
@@ -61,7 +62,6 @@ var loadQuestion = function (){
     // Load the question title with question from question array (found in questions.js)
     var questionTitle = qTitle.textContent = questionsWithAnswers[quesIndex].question;
 
-    console.log(quesIndex);
     // Add to index (get next question)
     quesIndex++;
 
@@ -155,5 +155,7 @@ var endQuiz = function (){
     timer.setAttribute("class","hide");
     
     // Set local storage to score the value of user's final score
-    localStorage.setItem("lastScore",finalScore.textContent); 
+    localStorage.setItem("lastScore", finalScore.textContent); 
+
+   
 }

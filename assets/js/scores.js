@@ -1,17 +1,19 @@
 var submitScore = document.querySelector("#submit");
 var highScores = document.querySelector("#highscores");
 var userInitialsEl = document.querySelector("#initials");
+var clearScores = document.querySelector("#clear");
 
 if (submitScore){
 submitScore.addEventListener("click", function(){
-    
-    // window.location.href = "highscores.html";
-    
+        
+    // In localstorage set key 'userInit' with value of initials from user
     localStorage.setItem("userInit",userInitialsEl.value);
 
+    // Change page function
     changePage();
 })};     
 
+// Func to change html page to show highscores
 var changePage = function () { 
     window.location.href = "highscores.html";
 }
@@ -19,18 +21,32 @@ var changePage = function () {
 
 var getUserData = function (){
 
-    var value = localStorage.getItem("userInit");
-    var userScore = localStorage.getItem("lastScore");
-
-    
-    console.log(value);
-    console.log(userScore);
-    if (userScore){
-        var userList = document.createElement("li");
-        userList.textContent = (value + "-" + userScore);
-        highScores.appendChild(userList);
-        console.log("it worked");
+    if (score){
+        // Get value from key 'userInit'
+        var initials = localStorage.getItem("userInit");
+        // Get initials from key 'lastScore'
+        var score = localStorage.getItem("lastScore");
+        var listItem = document.createElement("li");
+        listItem.textContent = (initials + " - " + score);
+        highScores.appendChild(listItem);
     }
+    
+    // Get value from key 'userInit'
+    var initials = localStorage.getItem("userInit");
+    // Get initials from key 'lastScore'
+    var score = localStorage.getItem("lastScore");
+
+    // If score isn't null (e.g doesn't take input)
+    // Create list element
+    var userList = document.createElement("li");
+    // Set text content of initials
+    userList.textContent = (initials + " - " + score);
+    highScores.appendChild(userList);
+    localStorage.setItem("userList", userList.value);
+
 
 }
 getUserData();
+
+
+// Store user score & name in localStorage - available as part of highscores.html   

@@ -48,5 +48,12 @@ var getUserData = function (){
 }
 getUserData();
 
+// Func to clear client data
+var clearData = function (){
+    // Clear local storage
+    localStorage.clear();
+    highScores.textContent = "";
+}
 
-// Store user score & name in localStorage - available as part of highscores.html   
+// If click on clear scores - call clear localstorage func
+clearScores.addEventListener("click", clearData);
